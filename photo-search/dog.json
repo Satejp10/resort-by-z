@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "golden retriever dog running in a sunny park",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9bea5a2e5dc2.jpeg",
+   "caption": "",
+   "source": "Pexels",
+   "original_width": "2688px",
+   "original_height": "1792px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ea50b5c0c0cb.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "1300px",
+   "original_height": "956px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d44ade66c12e.jpg",
+   "caption": "",
+   "source": "Golden Pet Brands",
+   "original_width": "1600px",
+   "original_height": "1067px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/753c238965bd.jpg",
+   "caption": "",
+   "source": "Sydney Nicole Photography",
+   "original_width": "1500px",
+   "original_height": "1000px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fd04024d95ab.jpg",
+   "caption": "",
+   "source": "StockCake",
+   "original_width": "1024px",
+   "original_height": "1024px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/765b0067c4f9.jpeg",
+   "caption": "",
+   "source": "Pexels",
+   "original_width": "6663px",
+   "original_height": "4444px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/12390496f490.jpg",
+   "caption": "",
+   "source": "StockCake",
+   "original_width": "1456px",
+   "original_height": "816px"
+  }
+ ]
+}

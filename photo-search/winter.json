@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "snow covered cabin in pine forest winter",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/804c8fc2326d.jpeg",
+   "caption": "",
+   "source": "Pexels",
+   "original_width": "2000px",
+   "original_height": "2666px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f113fec868ac.jpg",
+   "caption": "",
+   "source": "Unsplash",
+   "original_width": "3000px",
+   "original_height": "2001px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/678d85c182c9.jpg",
+   "caption": "",
+   "source": "500px ISO",
+   "original_width": "1500px",
+   "original_height": "1001px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ee70c468141c.jpg",
+   "caption": "",
+   "source": "StockCake",
+   "original_width": "1024px",
+   "original_height": "1024px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fa984c4e5dd1.jpg",
+   "caption": "",
+   "source": "Seattle Mag",
+   "original_width": "2000px",
+   "original_height": "1125px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/131b7707051d.jpg",
+   "caption": "",
+   "source": "Desenio",
+   "original_width": "2000px",
+   "original_height": "2667px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/61f4703d51e7.jpg",
+   "caption": "",
+   "source": "NordicPosterStore",
+   "original_width": "900px",
+   "original_height": "1125px"
+  }
+ ]
+}

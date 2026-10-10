@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "mountain lake landscape dramatic clouds reflection",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f3b4658d53e9.jpg",
+   "caption": "",
+   "source": "Pixnio",
+   "original_width": "1344px",
+   "original_height": "756px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2899e102d0cc.jpeg",
+   "caption": "",
+   "source": "Pexels",
+   "original_width": "2940px",
+   "original_height": "4409px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4b2e08d7714c.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "1300px",
+   "original_height": "956px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/781e71b64a4e.jpg",
+   "caption": "",
+   "source": "Shutterstock",
+   "original_width": "1500px",
+   "original_height": "1225px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d5c26897a073.jpg",
+   "caption": "",
+   "source": "Wallpaper Abyss - Alpha Coders",
+   "original_width": "1920px",
+   "original_height": "1080px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2616373dbd9e.jpg",
+   "caption": "",
+   "source": "Dreamstime",
+   "original_width": "1600px",
+   "original_height": "987px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a1d69b27f96b.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "1300px",
+   "original_height": "957px"
+  }
+ ]
+}

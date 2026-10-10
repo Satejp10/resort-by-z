@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "friends laughing together at an outdoor picnic",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8cb41e11c72d.jpg",
+   "caption": "",
+   "source": "Shutterstock",
+   "original_width": "1500px",
+   "original_height": "1100px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c4fa55e45179.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "1300px",
+   "original_height": "850px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/03664a496a03.jpg",
+   "caption": "",
+   "source": "DepositPhotos",
+   "original_width": "1600px",
+   "original_height": "1167px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0ba205b52d65.jpg",
+   "caption": "",
+   "source": "Shutterstock",
+   "original_width": "1500px",
+   "original_height": "1100px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6ff839960744.jpg",
+   "caption": "",
+   "source": "YouWorkForThem",
+   "original_width": "1184px",
+   "original_height": "781px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c64e8b8117e2.jpg",
+   "caption": "",
+   "source": "StockCake",
+   "original_width": "1456px",
+   "original_height": "816px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/889974e825b2.jpg",
+   "caption": "",
+   "source": "luna app",
+   "original_width": "1290px",
+   "original_height": "1898px"
+  }
+ ]
+}

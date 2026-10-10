@@ -1,0 +1,722 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Resort Photo Gallery</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --bg: #ffffff;
+            --surface: #f9f9f9;
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            --border: #e0e0e0;
+            --accent: #e8f0fe;
+            --danger: #d93025;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text-primary);
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --- Layout Containers --- */
+        .app-container {
+            position: relative;
+            width: 390px;
+            max-width: 100%;
+            margin: 0 auto;
+            height: 100vh;
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Header / Toolbar --- */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            min-height: 56px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-width: 0; /* Allow text truncation */
+            flex: 1;
+        }
+
+        .header-info h2 {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 2px 0 0 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        
+        .icon-btn:hover { background: rgba(0,0,0,0.05); }
+        .icon-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+        .toolbar-actions {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        /* --- Screen 1: Photo Viewer (Lightbox) --- */
+        .viewer-screen {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+            color: #fff;
+        }
+
+        .main-image-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            padding: 20px;
+        }
+        .nav-arrow:hover { color: #fff; }
+        .nav-next { right: 0; }
+        .nav-prev { left: 0; }
+
+        .filmstrip {
+            height: 80px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            overflow-x: auto;
+            border-top: 1px solid #333;
+        }
+
+        .thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            object-fit: cover;
+            opacity: 0.6;
+            cursor: pointer;
+            flex-shrink: 0;
+            border: 2px solid transparent;
+        }
+        .thumb.active {
+            opacity: 1;
+            border-color: #fff;
+        }
+
+        /* --- Screen 2: Details Panel (Overlay) --- */
+        .details-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 85%; /* Mobile side panel width */
+            max-width: 320px;
+            background: #fff;
+            z-index: 20;
+            transform: translateX(0); /* Visible state for screenshot */
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .details-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .details-header h3 { margin: 0; font-size: 18px; font-weight: 400; }
+
+        .details-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .detail-img-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .detail-img { width: 100%; height: 100%; object-fit: cover; }
+
+        .info-group { margin-bottom: 24px; }
+        .info-label { 
+            font-size: 13px; 
+            color: var(--text-secondary); 
+            margin-bottom: 6px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+        }
+        .info-value { 
+            font-size: 15px; 
+            line-height: 1.4; 
+            word-break: break-word;
+        }
+        .sub-text { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+        .map-placeholder {
+            width: 100%;
+            height: 120px;
+            background: #eef4ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .tags-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;}
+        .chip {
+            background: #f1f3f4;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            color: var(--text-primary);
+        }
+
+        .sync-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* --- Screen 3: Selection Mode --- */
+        .selection-mode .toolbar {
+            background: #fff;
+        }
+        .selection-count {
+            font-weight: 500;
+            font-size: 16px;
+            margin-left: 8px;
+        }
+
+        .grid-view {
+            flex: 1;
+            overflow-y: auto;
+            background: #fff;
+            padding: 8px;
+        }
+
+        .date-section-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 8px 4px 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .date-count { font-weight: 400; color: var(--text-secondary); font-size: 12px;}
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .grid-item {
+            position: relative;
+            aspect-ratio: 1;
+            background: #eee;
+        }
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Selection Checkbox Overlay */
+        .check-overlay {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .check-overlay svg { fill: #fff; width: 14px; height: 14px; }
+
+        /* --- Screen 4: Search Overlay --- */
+        .search-overlay {
+            position: absolute;
+            inset: 0;
+            background: #fff;
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-bar-container {
+            padding: 8px 8px 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-input-wrapper {
+            flex: 1;
+            background: #f1f3f4;
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid transparent;
+        }
+        .search-input-wrapper.focused {
+            background: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .search-input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .suggestions-area {
+            padding: 0 16px;
+            overflow-y: auto;
+        }
+        .try-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            margin-top: 8px;
+        }
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+        .suggestion-chip {
+            background: #f1f3f4;
+            padding: 8px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .suggestion-chip:hover { background: #e8eaed; }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+        .empty-icon {
+            font-size: 64px;
+            color: #dadce0;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        .empty-title { font-size: 20px; color: var(--text-primary); margin-bottom: 8px; font-weight: 400;}
+        .empty-sub { font-size: 14px; line-height: 1.5; max-width: 280px; margin: 0 auto; }
+
+        /* Navigation Helper for Demo */
+        .demo-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            gap: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 30px;
+        }
+        .demo-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: #fff;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .demo-btn.active { background: var(--primary); color: #fff; }
+
+        /* Hide/Show Logic Classes */
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="app-container" id="appContainer">
+
+    <!-- SCREEN 1: PHOTO VIEWER -->
+    <div id="screen-viewer" class="viewer-screen">
+        <!-- Top Bar -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <button class="icon-btn" aria-label="Back">
+                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                </button>
+                <div class="header-info">
+                    <h2>Oct 10, 2026</h2>
+                    <p>Flour + Water, San Francisco</p>
+                </div>
+            </div>
+            <div class="toolbar-actions">
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg></button> <!-- Info -->
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></button> <!-- Download -->
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button> <!-- Heart -->
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg></button> <!-- Share -->
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button> <!-- Delete -->
+            </div>
+        </div>
+
+        <!-- Main Image Area -->
+        <div class="main-image-container">
+            <img src="https://images.unsplash.com/photo-1473093295043-c8128c9fd119?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pasta Dish" class="main-image">
+            
+            <button class="nav-arrow nav-prev">
+                <svg viewBox="0 0 24 24" style="width:32px;height:32px;"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#fff"/></svg>
+            </button>
+            <button class="nav-arrow nav-next">
+                <svg viewBox="0 0 24 24" style="width:32px;height:32px;"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#fff"/></svg>
+            </button>
+        </div>
+
+        <!-- Filmstrip -->
+        <div class="filmstrip">
+            <img src="https://images.unsplash.com/photo-1473093295043-c8128c9fd119?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60" class="thumb active">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60" class="thumb">
+            <img src="https://images.unsplash.com/photo-1517248235667-d43700c4ee08?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60" class="thumb">
+            <img src="https://images.unsplash.com/photo-1534168040072-d15de0359f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60" class="thumb">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60" class="thumb">
+            <img src="https://images.unsplash.com/photo-1447977905380-59bcb474ad83?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60" class="thumb">
+            <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60" class="thumb">
+        </div>
+
+        <!-- DETAILS PANEL (Overlay on Viewer) -->
+        <div id="details-panel" class="details-overlay">
+            <div class="details-header">
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button>
+                    <h3>Details</h3>
+                </div>
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+            </div>
+            
+            <div class="details-scroll">
+                <div class="detail-img-container">
+                    <img src="https://images.unsplash.com/photo-1473093295043-c8128c9fd119?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="detail-img">
+                </div>
+                
+                <div class="info-value" style="font-size:16px; font-weight:500; margin-bottom:20px;">Handmade tagliatelle</div>
+
+                <div class="info-group">
+                    <div class="info-label">
+                        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#5f6368"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        Date
+                    </div>
+                    <div class="info-value">Saturday, October 10, 2026 · 11:00 AM</div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">
+                        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#5f6368"><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+                        Camera
+                    </div>
+                    <div class="info-value">GoPro HERO12</div>
+                    <div class="sub-text">f/2.8 · 1/240 · ISO 100 · 2.87mm</div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">
+                        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#5f6368"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        Details
+                    </div>
+                    <div class="info-value">1200 × 800 · 1.0 MP</div>
+                </div>
+
+                 <div class="info-group">
+                    <div class="info-label">
+                        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#5f6368"><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83a.996.996 0 0 0 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
+                        File name
+                    </div>
+                    <div class="info-value">GOP_20261010110000029.jpg</div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">
+                         <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#d93025"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        Location
+                    </div>
+                    <div class="info-value">Flour + Water, San Francisco</div>
+                    
+                    <div class="map-placeholder">
+                        <svg viewBox="0 0 24 24" style="width:32px;height:32px;fill:#d93025"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    </div>
+                </div>
+
+                <div class="tags-row">
+                    <span class="chip">restaurant</span>
+                    <span class="chip">food</span>
+                    <span class="chip">dinner</span>
+                </div>
+
+                <div class="sync-status">
+                     <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#1a73e8"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/></svg>
+                     Backed up · Resort sync
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SCREEN 3: SELECTION MODE -->
+    <div id="screen-selection" class="viewer-screen selection-mode hidden">
+         <div class="toolbar">
+            <div class="toolbar-left">
+                <button class="icon-btn" aria-label="Close">
+                    <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                </button>
+                <span class="selection-count">84 selected</span>
+            </div>
+            <div class="toolbar-actions">
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></button>
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg></button>
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></button>
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
+                <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></button>
+            </div>
+        </div>
+
+        <div class="grid-view">
+            <div class="date-section-header">
+                <span>Today</span>
+                <span class="date-count">3 items</span>
+            </div>
+            <div class="photo-grid">
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1473093295043-c8128c9fd119?w=200" alt="">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200" alt="">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1517248235667-d43700c4ee08?w=200" alt="">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+            </div>
+
+            <div class="date-section-header">
+                <span>Yesterday</span>
+                <span class="date-count">7 items</span>
+            </div>
+            <div class="photo-grid">
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1534168040072-d15de0359f10?w=200" alt="">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200" alt="">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1447977905380-59bcb474ad83?w=200" alt="">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?w=200" alt="">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1524861856965-68add7c49807?w=200" alt="">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+                <div class="grid-item" style="grid-column: span 2; grid-row: span 2;">
+                    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=300" alt="" style="height:100%;">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+            </div>
+             <div class="date-section-header">
+                <span>Monday</span>
+                <span class="date-count">1 item</span>
+            </div>
+             <div class="photo-grid">
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1464454709131-ffd692591ee5?w=200" alt="">
+                    <div class="check-overlay"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: SEARCH OVERLAY -->
+    <div id="screen-search" class="search-overlay hidden">
+        <div class="search-bar-container">
+            <button class="icon-btn" onclick="switchScreen('viewer')">
+                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            </button>
+            <div class="search-input-wrapper focused">
+                <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#5f6368"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                <input type="text" class="search-input" value="beach" autofocus>
+            </div>
+        </div>
+
+        <div class="suggestions-area">
+            <div class="try-label">Try:</div>
+            <div class="chips-container">
+                <span class="suggestion-chip">Milo</span>
+                <span class="suggestion-chip">Luna</span>
+                <span class="suggestion-chip">Coffee</span>
+                <span class="suggestion-chip">Food</span>
+                <span class="suggestion-chip">Beach</span>
+                <span class="suggestion-chip">Paris</span>
+                <span class="suggestion-chip">Winter</span>
+                <span class="suggestion-chip">Nature</span>
+            </div>
+
+            <div class="empty-state">
+                <div class="empty-icon">
+                   <svg viewBox="0 0 24 24" style="width:64px;height:64px;fill:#dadce0"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </div>
+                <div class="empty-title">Search your memories</div>
+                <div class="empty-sub">Find photos by what's in them — places, pets, food and more</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Controls to switch views for the user to check requirements -->
+<div class="demo-nav">
+    <button class="demo-btn active" onclick="switchScreen('viewer')" title="Viewer & Details">1</button>
+    <button class="demo-btn" onclick="switchScreen('selection')" title="Selection Mode">2</button>
+    <button class="demo-btn" onclick="switchScreen('search')" title="Search">3</button>
+</div>
+
+<script>
+    function switchScreen(screen) {
+        // Hide all screens
+        document.getElementById('screen-viewer').classList.add('hidden');
+        document.getElementById('screen-selection').classList.add('hidden');
+        document.getElementById('screen-search').classList.add('hidden');
+
+        // Update buttons
+        document.querySelectorAll('.demo-btn').forEach(b => b.classList.remove('active'));
+
+        // Show selected screen
+        if(screen === 'viewer') {
+            document.getElementById('screen-viewer').classList.remove('hidden');
+            document.querySelector('.demo-btn:nth-child(1)').classList.add('active');
+            // Ensure details panel is visible in this mode as per requirement "viewer with details"
+            document.getElementById('details-panel').style.transform = 'translateX(0)';
+        } else if (screen === 'selection') {
+            document.getElementById('screen-selection').classList.remove('hidden');
+            document.querySelector('.demo-btn:nth-child(2)').classList.add('active');
+        } else if (screen === 'search') {
+            document.getElementById('screen-search').classList.remove('hidden');
+            document.querySelector('.demo-btn:nth-child(3)').classList.add('active');
+        }
+    }
+    
+    // Initialize
+    switchScreen('viewer');
+</script>
+
+</body>
+</html>
+```

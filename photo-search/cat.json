@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "cute cat sleeping curled up on a couch",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7a1c4d48e22a.png",
+   "caption": "",
+   "source": "Webvet",
+   "original_width": "1376px",
+   "original_height": "768px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b3e6f65bc9ab.jpg",
+   "caption": "",
+   "source": "Reddit",
+   "original_width": "3024px",
+   "original_height": "4032px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a5b652f8ba42.png",
+   "caption": "",
+   "source": "Webvet",
+   "original_width": "1376px",
+   "original_height": "768px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/349031b3aeeb.jpg",
+   "caption": "",
+   "source": "Dreamstime",
+   "original_width": "1600px",
+   "original_height": "1158px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ef93e162dc4f.jpg",
+   "caption": "",
+   "source": "Newsweek",
+   "original_width": "1600px",
+   "original_height": "1066px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cffb10e5f409.jpeg",
+   "caption": "",
+   "source": "Pexels",
+   "original_width": "3394px",
+   "original_height": "6031px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/030fec18912c.jpg",
+   "caption": "",
+   "source": "Shutterstock",
+   "original_width": "1500px",
+   "original_height": "1101px"
+  }
+ ]
+}

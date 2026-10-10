@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "beach sunset with ocean waves golden hour",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5a1cfe50b19a.jpeg",
+   "caption": "",
+   "source": "Pexels",
+   "original_width": "1125px",
+   "original_height": "750px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ded161ddebd8.jpg",
+   "caption": "",
+   "source": "Motion Array",
+   "original_width": "1920px",
+   "original_height": "1282px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c7401f1890b0.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "866px",
+   "original_height": "1390px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bc3450957d5d.jpg",
+   "caption": "",
+   "source": "Motion Array",
+   "original_width": "1920px",
+   "original_height": "1282px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ddf26dc57f56.jpg",
+   "caption": "",
+   "source": "Pine River Realty",
+   "original_width": "1280px",
+   "original_height": "800px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/724052ec9bfe.jpg",
+   "caption": "",
+   "source": "Followsoots",
+   "original_width": "1620px",
+   "original_height": "1620px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5fe9da4b3601.jpg",
+   "caption": "",
+   "source": "Reddit",
+   "original_width": "640px",
+   "original_height": "1423px"
+  }
+ ]
+}

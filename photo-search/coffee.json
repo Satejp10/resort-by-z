@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "cappuccino latte art on wooden table in a cafe",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2dee8cdf3e33.jpg",
+   "caption": "",
+   "source": "Unsplash",
+   "original_width": "3000px",
+   "original_height": "4500px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fbf8216f7ec5.jpg",
+   "caption": "",
+   "source": "Unsplash",
+   "original_width": "3000px",
+   "original_height": "3460px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2141d0a7202b.jpeg",
+   "caption": "",
+   "source": "Pexels",
+   "original_width": "8640px",
+   "original_height": "5760px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f90e50a2b140.jpg",
+   "caption": "",
+   "source": "Pinterest",
+   "original_width": "675px",
+   "original_height": "1200px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/765161009d4d.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "1300px",
+   "original_height": "956px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/316e622cb427.jpg",
+   "caption": "",
+   "source": "Reddit",
+   "original_width": "2992px",
+   "original_height": "2992px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4b0112ea2196.jpg",
+   "caption": "",
+   "source": "Deposit Photos",
+   "original_width": "1600px",
+   "original_height": "1167px"
+  }
+ ]
+}

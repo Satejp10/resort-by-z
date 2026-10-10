@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "fresh italian pasta dinner plate closeup",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/576ca2e09bd2.jpg",
+   "caption": "",
+   "source": "Coley Cooks",
+   "original_width": "1200px",
+   "original_height": "800px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/46b1b25bd500.jpg",
+   "caption": "",
+   "source": "Coley Cooks",
+   "original_width": "768px",
+   "original_height": "1151px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/65eb112bbb8b.jpg",
+   "caption": "",
+   "source": "Coley Cooks",
+   "original_width": "768px",
+   "original_height": "1152px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4aa9d6c8edf2.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "1300px",
+   "original_height": "956px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d122cbcf5dfd.jpg",
+   "caption": "",
+   "source": "Marcellina In Cucina",
+   "original_width": "1200px",
+   "original_height": "900px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5a89066c46d3.jpg",
+   "caption": "",
+   "source": "The Pasta Project",
+   "original_width": "1200px",
+   "original_height": "900px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2fb1edfd4f3d.jpg",
+   "caption": "",
+   "source": "The clever meal",
+   "original_width": "1200px",
+   "original_height": "1538px"
+  }
+ ]
+}

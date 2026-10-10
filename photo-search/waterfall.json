@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "waterfall in a green forest long exposure",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bf57329564b8.jpg",
+   "caption": "",
+   "source": "Unsplash",
+   "original_width": "3000px",
+   "original_height": "3748px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/de601837c07e.jpg",
+   "caption": "",
+   "source": "Digital Camera World",
+   "original_width": "1989px",
+   "original_height": "1119px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a05b2ab51fea.jpg",
+   "caption": "",
+   "source": "Dreamstime",
+   "original_width": "900px",
+   "original_height": "1690px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a3ceeb4087b0.jpg",
+   "caption": "",
+   "source": "Unsplash",
+   "original_width": "3000px",
+   "original_height": "2250px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c8c0d146c51d.jpeg",
+   "caption": "",
+   "source": "Pexels",
+   "original_width": "6048px",
+   "original_height": "3400px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d6351c166ae6.jpg",
+   "caption": "",
+   "source": "DepositPhotos",
+   "original_width": "900px",
+   "original_height": "1700px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ea157174cc2b.jpg",
+   "caption": "",
+   "source": "Shutterstock",
+   "original_width": "1500px",
+   "original_height": "1100px"
+  }
+ ]
+}

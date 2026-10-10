@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "eiffel tower and paris rooftops",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/70854930c9f4.jpg",
+   "caption": "",
+   "source": "Reddit",
+   "original_width": "1638px",
+   "original_height": "2048px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/dc3c661fadcd.jpg",
+   "caption": "",
+   "source": "Gardenista",
+   "original_width": "3200px",
+   "original_height": "2398px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/caa086d1919b.jpg",
+   "caption": "",
+   "source": "Paris Discovery Guide",
+   "original_width": "1500px",
+   "original_height": "1500px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/839defe50a90.jpg",
+   "caption": "",
+   "source": "Jennifer Fox Weddings",
+   "original_width": "1024px",
+   "original_height": "1539px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/de58b6ccf112.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "1300px",
+   "original_height": "956px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/975d59a43c82.jpg",
+   "caption": "",
+   "source": "Yahoo Creators",
+   "original_width": "1200px",
+   "original_height": "800px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/68c804532072.jpg",
+   "caption": "",
+   "source": "Peter Lik",
+   "original_width": "1650px",
+   "original_height": "2400px"
+  }
+ ]
+}

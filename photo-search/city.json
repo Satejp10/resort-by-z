@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "tokyo street at night neon signs",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3a2bcff2bff2.jpg",
+   "caption": "",
+   "source": "Unsplash",
+   "original_width": "3000px",
+   "original_height": "2004px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/50d440ae47ee.jpg",
+   "caption": "",
+   "source": "Reddit",
+   "original_width": "1766px",
+   "original_height": "2208px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6bee14434bdb.jpg",
+   "caption": "",
+   "source": "Amazon.com",
+   "original_width": "1600px",
+   "original_height": "1140px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fdd872928412.jpeg",
+   "caption": "",
+   "source": "Pexels",
+   "original_width": "4160px",
+   "original_height": "6240px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/827e4db86bb3.jpg",
+   "caption": "",
+   "source": "NeonsignLife",
+   "original_width": "1280px",
+   "original_height": "854px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e127c918428f.jpg",
+   "caption": "",
+   "source": "StockCake",
+   "original_width": "1376px",
+   "original_height": "768px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c0cece4c7bc5.jpg",
+   "caption": "",
+   "source": "Reddit",
+   "original_width": "1440px",
+   "original_height": "960px"
+  }
+ ]
+}

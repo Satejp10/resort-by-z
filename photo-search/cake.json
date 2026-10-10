@@ -1,0 +1,58 @@
+{
+ "success": true,
+ "query": "birthday cake with lit candles on a table",
+ "count": 7,
+ "ranked": false,
+ "captioned_count": 0,
+ "results": [
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c18d957dbe65.jpg",
+   "caption": "",
+   "source": "Unsplash",
+   "original_width": "3000px",
+   "original_height": "2000px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/41d9f62bcb03.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "1300px",
+   "original_height": "957px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/007ec2a9006a.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "1300px",
+   "original_height": "956px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1172de2ad589.jpg",
+   "caption": "",
+   "source": "Shutterstock",
+   "original_width": "1500px",
+   "original_height": "1100px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8207d6b2e4a3.jpg",
+   "caption": "",
+   "source": "DepositPhotos",
+   "original_width": "1600px",
+   "original_height": "1300px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6bb2973bf1e4.jpg",
+   "caption": "",
+   "source": "Alamy",
+   "original_width": "867px",
+   "original_height": "1390px"
+  },
+  {
+   "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e6f8b8848238.jpg",
+   "caption": "",
+   "source": "Deposit Photos",
+   "original_width": "1600px",
+   "original_height": "1167px"
+  }
+ ]
+}
