@@ -1,0 +1,249 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-roboto), "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --color-gp-bg: var(--gp-bg);
+  --color-gp-surface: var(--gp-surface);
+  --color-gp-text: var(--gp-text);
+  --color-gp-text2: var(--gp-text2);
+  --color-gp-chip: var(--gp-chip);
+  --color-gp-hover: var(--gp-hover);
+  --color-gp-divider: var(--gp-divider);
+  --color-gp-blue: var(--gp-blue);
+  --color-gp-blue-hover: var(--gp-blue-hover);
+  --color-gp-blue-soft: var(--gp-blue-soft);
+  --color-gp-viewer: var(--gp-viewer);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--gp-blue);
+}
+
+/* ---------- Material Symbols Rounded (subset, local) ---------- */
+@font-face {
+  font-family: "Material Symbols Rounded";
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: block;
+  src: url("/fonts/material-symbols.woff2") format("woff2");
+}
+
+/* Component classes that set `display` MUST live in the components layer:
+   unlayered rules would otherwise beat Tailwind's utilities layer and defeat
+   responsive utilities like `hidden sm:inline-flex` (Tailwind v4 cascade). */
+@layer components {
+  .msr {
+    font-family: "Material Symbols Rounded";
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    user-select: none;
+  }
+
+  .msr-fill {
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+  }
+}
+
+/* ---------- Resort palette (light + dark via CSS vars) ---------- */
+:root {
+  color-scheme: light;
+  --gp-bg: #ffffff;
+  --gp-surface: #ffffff;
+  --gp-text: #202124;
+  --gp-text2: #5f6368;
+  --gp-chip: #f1f3f4;
+  --gp-hover: #f1f3f4;
+  --gp-divider: #e0e0e0;
+  --gp-blue: #1a73e8;
+  --gp-blue-hover: #1b66c9;
+  --gp-blue-soft: #e8f0fe;
+  --gp-viewer: #ffffff;
+  --radius: 0.625rem;
+  /* shadcn compatibility vars (kept minimal) */
+  --background: #ffffff;
+  --foreground: #202124;
+  --popover: #ffffff;
+  --popover-foreground: #202124;
+  --border: #e0e0e0;
+}
+
+.dark {
+  color-scheme: dark;
+  --gp-bg: #202124;
+  --gp-surface: #202124;
+  --gp-text: #e8eaed;
+  --gp-text2: #9aa0a6;
+  --gp-chip: #303134;
+  --gp-hover: #303134;
+  --gp-divider: #3c4043;
+  --gp-blue: #8ab4f8;
+  --gp-blue-hover: #aecbfa;
+  --gp-blue-soft: #2b3c5c;
+  --gp-viewer: #16171a;
+  --background: #202124;
+  --foreground: #e8eaed;
+  --popover: #292a2d;
+  --popover-foreground: #e8eaed;
+  --border: #3c4043;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    @apply bg-gp-bg text-gp-text;
+    font-family: var(--font-roboto), "Roboto", "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+/* ---------- accessibility: visible keyboard focus ring ---------- */
+button:focus-visible,
+[role="menuitem"]:focus-visible,
+[role="radio"]:focus-visible,
+[role="switch"]:focus-visible,
+[role="dialog"]:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--gp-blue);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+img:focus {
+  outline: none;
+}
+
+/* ---------- reduced motion (OS preference and manual setting) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ---------- small utility bits ---------- */
+@layer components {
+  .gp-kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 7px;
+    border-radius: 6px;
+    border: 1px solid var(--gp-divider);
+    border-bottom-width: 2px;
+    background: var(--gp-chip);
+    color: var(--gp-text);
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .gp-icon-btn {
+    @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-gp-text2 transition-colors;
+  }
+  .gp-icon-btn:hover {
+    @apply bg-gp-hover;
+  }
+}
+
+@keyframes gp-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.gp-fade-in {
+  animation: gp-fade-in 0.18s ease-out;
+}
+
+/* ---------- thin overlay scrollbars ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gp-divider) transparent;
+}
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--gp-divider);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* filmstrip fade masks */
+.fade-x {
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+/* keep toasts clear of the home-indicator / gesture bar on notched devices */
+[data-sonner-toaster] {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@keyframes gp-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.gp-zoom-in {
+  animation: gp-zoom-in 0.18s ease-out;
+}
+
+@keyframes gp-slide-up {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.gp-slide-up {
+  animation: gp-slide-up 0.2s ease-out;
+}
